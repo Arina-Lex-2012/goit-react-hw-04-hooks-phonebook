@@ -7,7 +7,10 @@ import ContactList from './components/ContactList/ContactList';
 
 
 export default function App() {
-  const [contacts, setContacts] = useState(JSON.parse(localStorage.getItem('contacts')) ?? []);
+  const [contacts, setContacts] = useState(() => {
+    return JSON.parse(localStorage.getItem('contacts')) ?? []
+  });
+    
   const [filter, setFilter] = useState('');
 
   const deleteContact = (contactId) => {
@@ -33,11 +36,8 @@ export default function App() {
   }; 
   
   
-
-  useEffect(() =>{   
-
+  useEffect(() =>{ 
     localStorage.setItem('contacts', JSON.stringify(contacts));  
-     
   }, [contacts]);
 
   const normalizedFilter = filter.toLowerCase();
